@@ -12,4 +12,4 @@
     register: raw_vrf_data
 - name: determine vrfs from vrf data
   set_fact:
-    vrfs: "{{ raw_vrf_data | parse_vrfs }}"
+    vrfs: "{{ raw_vrf_data | parse_ios_vrfs }}"

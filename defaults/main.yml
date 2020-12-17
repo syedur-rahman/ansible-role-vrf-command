@@ -1,0 +1,6 @@
+---
+# defaults file for vrf_command
+
+# vrf specific commands
+vrf_commands:
+  - "show ip route vrf <vrf>"

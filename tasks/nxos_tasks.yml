@@ -5,4 +5,15 @@
   register: raw_vrf_data
 - name: determine vrfs from vrf data
   set_fact:
-    vrfs: "{{ raw_vrf_data | parse_vrfs }}"
+    vrfs: "{{ raw_vrf_data | parse_nxos_vrfs }}"
+- name: update commands to be vrf aware
+  set_fact:
+    vrf_commands: "{{ vrf_commands | update_with_vrfs(vrfs) }}"
+- name: run the commands
+  nxos_command:
+    commands: "{{ item }}"
+  register: raw_command_data
+  loop: "{{ vrf_commands }}"
+- name: show the command data
+  debug:
+    msg: "{{ raw_command_data }}"
