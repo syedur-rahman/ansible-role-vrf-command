@@ -1,0 +1,15 @@
+# ios specific tasks
+- name: collect vrf data
+  block:
+  - name: collect vrf data - show vrf
+    ios_command:
+      commands: show vrf
+    register: raw_vrf_data
+  rescue:
+  - name: collect vrf data - show ip vrf
+    ios_command:
+      commands: show ip vrf
+    register: raw_vrf_data
+- name: determine vrfs from vrf data
+  set_fact:
+    vrfs: "{{ raw_vrf_data | parse_vrfs }}"

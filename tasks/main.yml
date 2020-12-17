@@ -1,0 +1,23 @@
+---
+# tasks file for vrf_command
+
+# nxos specific tasks
+- name: Run Cisco NXOS VRF Logic
+  include_tasks: nxos_tasks.yml
+  when: ansible_network_os == 'nxos'
+
+# ios specific tasks
+- name: Run Cisco IOS VRF Logic
+  include_tasks: ios_tasks.yml
+  when: ansible_network_os == 'ios'
+
+# eos specific tasks
+- name: Run Arista EOS VRF Logic
+  include_tasks: eos_tasks.yml
+  when: ansible_network_os == 'eos'
+
+# print registered data
+- name: print data
+  debug:
+    msg: "{{ vrfs }}"
+  #when: "'stdout_lines' in vrf_command_output"

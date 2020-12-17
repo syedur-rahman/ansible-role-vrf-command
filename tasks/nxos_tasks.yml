@@ -1,0 +1,8 @@
+# nxos specific tasks
+- name: collect vrf data
+  nxos_command:
+    commands: show vrf
+  register: raw_vrf_data
+- name: determine vrfs from vrf data
+  set_fact:
+    vrfs: "{{ raw_vrf_data | parse_vrfs }}"
