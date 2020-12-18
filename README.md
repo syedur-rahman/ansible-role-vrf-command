@@ -13,7 +13,7 @@ The role is intended to be an enhancement of the default behavior of the followi
 
 See **Example Playbook 2** for the playbook details for this example demonstration.
 
-![Example Playbook 2](demo.gif)
+![Example Playbook 2](https://github.com/syedur-rahman/ansible-role-vrf-command/blob/main/demo.gif)
 
 ## Requirements
 
