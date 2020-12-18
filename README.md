@@ -1,4 +1,5 @@
 # vrf_command
+[![Ansible Galaxy](https://img.shields.io/badge/Ansible%20Galaxy-vrf__aware-blue)](https://galaxy.ansible.com/syedur_rahman/vrf_command/)
 
 This Ansible Network role provides the ability to send **VRF-aware** network commands to network devices dynamically. Currently, this is supported on IOS / EOS / NXOS devices.
 
