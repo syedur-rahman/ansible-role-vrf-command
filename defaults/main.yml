@@ -1,6 +1,6 @@
 ---
 # defaults file for vrf_command
 
-# vrf specific commands
+# commands to be run via the role
 vrf_commands:
   - "show ip route vrf <vrf>"

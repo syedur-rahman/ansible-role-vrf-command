@@ -1,0 +1,27 @@
+galaxy_info:
+  role_name: vrf_command
+  author: Syedur Rahman
+  description: VRF-aware network commands.
+  license: "license (MIT)"
+  min_ansible_version: 2.9
+  platforms:
+    - name: nxos
+      versions:
+        - all
+    - name: ios
+      versions:
+      - all
+    - name: eos
+      versions:
+      - all
+  galaxy_tags:
+    - network
+    - cisco
+    - arista
+    - ios
+    - iosxe
+    - nxos
+    - nexus
+    - eos
+    - vrf
+    - command
