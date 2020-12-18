@@ -1,19 +1,24 @@
-# nxos specific tasks
-- name: collect vrf data
+---
+# tasks file for nxos tasks
+
+- name: Cisco NXOS - Collect VRF data.
   nxos_command:
     commands: show vrf
   register: raw_vrf_data
-- name: determine vrfs from vrf data
+  when: vrfs_required
+
+- name: Cisco NXOS - Determine VRFs from VRF data.
   set_fact:
     vrfs: "{{ raw_vrf_data | parse_nxos_vrfs }}"
-- name: update commands to be vrf aware
+  when: vrfs_required
+
+- name: Cisco NXOS - Build user VRF-aware commands.
   set_fact:
-    vrf_commands: "{{ vrf_commands | update_with_vrfs(vrfs) }}"
-- name: run the commands
+    vrf_commands: "{{ vrf_commands | update_with_vrfs(vrfs | default([])) }}"
+
+- name: Cisco NXOS - Run user VRF-aware commands.
+  ignore_errors: yes
   nxos_command:
     commands: "{{ item }}"
   register: raw_command_data
   loop: "{{ vrf_commands }}"
-- name: show the command data
-  debug:
-    msg: "{{ raw_command_data }}"

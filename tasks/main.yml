@@ -1,23 +1,26 @@
 ---
 # tasks file for vrf_command
 
-# nxos specific tasks
-- name: Run Cisco NXOS VRF Logic
+- name: Determine if user provided commands require VRF modifications.
+  set_fact:
+    vrfs_required: "{{ vrf_commands | check_for_vrfs }}"
+
+- name: Run the Cisco NXOS VRF logic.
   include_tasks: nxos_tasks.yml
   when: ansible_network_os == 'nxos'
 
-# ios specific tasks
-- name: Run Cisco IOS VRF Logic
+- name: Run the Cisco IOS VRF logic.
   include_tasks: ios_tasks.yml
   when: ansible_network_os == 'ios'
 
-# eos specific tasks
-- name: Run Arista EOS VRF Logic
+- name: Run the Arista EOS VRF logic.
   include_tasks: eos_tasks.yml
   when: ansible_network_os == 'eos'
 
-# print registered data
-- name: print data
+- name: Clean up command output.
+  set_fact:
+    vrf_command_output: "{{ raw_command_data | clean_up_command_output }}"
+
+- name: Show the show command output.
   debug:
-    msg: "{{ vrfs }}"
-  #when: "'stdout_lines' in vrf_command_output"
+    msg: "{{ vrf_command_output }}"

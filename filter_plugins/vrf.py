@@ -82,7 +82,7 @@ def parse_ios_vrfs(raw_vrf_data):
             # relative position with a bit of an error margin as the header
             # otherwise assume this is a multi-line output; only really
             # required for ios as ios has no easy keywords to determine 
-            # whether the line contains a vrf name
+            # whether the line contains a vrf name when using 'show ip vrf'
             if vrf_line_column_location <= ( column_location + error_margin ):
                 # capture vrf name
                 vrf = line.split()[0]

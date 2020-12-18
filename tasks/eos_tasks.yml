@@ -1,8 +1,24 @@
-# eos specific tasks
-- name: collect vrf data
+---
+# tasks file for eos tasks
+
+- name: Arista EOS - Collect VRF data.
   eos_command:
     commands: show vrf
   register: raw_vrf_data
-- name: determine vrfs from vrf data
+  when: vrfs_required
+
+- name: Arista EOS - Determine VRFs from VRF data.
   set_fact:
     vrfs: "{{ raw_vrf_data | parse_eos_vrfs }}"
+  when: vrfs_required
+
+- name: Arista EOS - Build user VRF-aware commands.
+  set_fact:
+    vrf_commands: "{{ vrf_commands | update_with_vrfs(vrfs | default([])) }}"
+
+- name: Arista EOS - Run user VRF-aware commands.
+  ignore_errors: yes
+  eos_command:
+    commands: "{{ item }}"
+  register: raw_command_data
+  loop: "{{ vrf_commands }}"
