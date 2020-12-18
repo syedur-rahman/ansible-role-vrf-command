@@ -86,7 +86,7 @@ The below example playbook demonstrates manipulating the `vrf_command_output` to
       
   roles:
     - syedur_rahman.vrf_command
-  	
+
 - hosts: localhost
 
   tasks:
