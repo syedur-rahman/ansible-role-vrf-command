@@ -90,7 +90,7 @@ The below example playbook demonstrates manipulating the `vrf_command_output` to
     loop: "{{ groups['all'] }}"
 ```
 
-With the below being the`show_command.j2` template.
+With the below being the `show_command.j2` template.
 
 ```jinja2
 {% for show_command_info in hostvars[item]['vrf_command_output'] %}
