@@ -1,6 +1,6 @@
 # vrf_command
 
-This Ansible Network role provides the ability to send VRF-aware network commands to network devices dynamically. Currently, this is supported on IOS / EOS / NXOS devices.
+This Ansible Network role provides the ability to send **VRF-aware** network commands to network devices dynamically. Currently, this is supported on IOS / EOS / NXOS devices.
 
 The role is intended to be an enhancement of the default behavior of the following modules:
 
@@ -14,7 +14,7 @@ None.
 
 ## Role Variable
 
-The following value that should be updated based on your requirements (see `defaults/main.yml`):
+The following value should be updated based on your requirements (see `defaults/main.yml`):
 
 ```yaml
 vrf_command_list:
@@ -22,9 +22,15 @@ vrf_command_list:
   - "show version"
 ```
 
-The `vrf_command_list` should be updated to include all commands that the you wish to run against your network devices. To make a command behave in a **VRF-aware** manner, use the syntax `<vrf>` within the command.
+The `vrf_command_list` should be updated to include all commands that the you wish to run against your network devices. To make a show command behave in a **VRF-aware** manner, the syntax `<vrf>` should be used as can be seen above.
 
-Note that you can run regular non-VRF related commands as well.
+The `<vrf>` in the command will be replaced with the VRFs available on the device including the global table. For example, if a device has the VRFs `dev` and `prod`, the `show ip route vrf <vrf>` command will dynamically expand out to the following:
+
+* `show ip route`
+* `show ip route vrf dev`
+* `show ip route vrf prod`
+
+Note that you can run regular non-VRF related commands as well via this role.
 
 ## Output Variable
 
@@ -43,7 +49,7 @@ vrf_command_output:
 
 ```
 
-The data structure returns a list of values. Within each list are three keys.
+The data structure returns a list of values. Within each list item are three keys.
 
 - `command` - The show command that was run against the network device.
 - `failed` - Boolean where `true` is command failed and `false` is command executed successfully.
@@ -79,7 +85,7 @@ The below example playbook demonstrates manipulating the `vrf_command_output` to
       - "show ip route vrf <vrf>"
       
   roles:
-  	- syedur_rahman.vrf_command
+    - syedur_rahman.vrf_command
   	
 - hosts: localhost
 
@@ -101,7 +107,7 @@ With the below being the `show_command.j2` template.
 {% endfor %}
 ```
 
-This results in the following type of output per device.
+This results in the following type of output file per device.
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

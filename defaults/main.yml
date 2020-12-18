@@ -4,3 +4,4 @@
 # commands to be run via the role
 vrf_command_list:
   - "show ip route vrf <vrf>"
+  - "show version"
