@@ -21,11 +21,11 @@
 
 - name: Cisco IOS - Build user VRF-aware commands.
   set_fact:
-    vrf_commands: "{{ vrf_commands | update_with_vrfs(vrfs | default([])) }}"
+    vrf_command_list: "{{ vrf_command_list | update_with_vrfs(vrfs | default([])) }}"
 
 - name: Cisco IOS - Run user VRF-aware commands.
   ignore_errors: yes
   ios_command:
     commands: "{{ item }}"
   register: raw_command_data
-  loop: "{{ vrf_commands }}"
+  loop: "{{ vrf_command_list }}"

@@ -20,7 +20,3 @@
 - name: Clean up command output.
   set_fact:
     vrf_command_output: "{{ raw_command_data | clean_up_command_output }}"
-
-- name: Show the show command output.
-  debug:
-    msg: "{{ vrf_command_output }}"
