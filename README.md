@@ -9,6 +9,12 @@ The role is intended to be an enhancement of the default behavior of the followi
 - `nxos_command`
 - `eos_command`
 
+## Demonstration
+
+See **Example Playbook 2** for the playbook details for this example demonstration.
+
+![Example Playbook 2](demo.gif)
+
 ## Requirements
 
 None.
