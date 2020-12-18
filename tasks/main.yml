@@ -3,7 +3,7 @@
 
 - name: Determine if user provided commands require VRF modifications.
   set_fact:
-    vrfs_required: "{{ vrf_commands | check_for_vrfs }}"
+    vrfs_required: "{{ vrf_command_list | check_for_vrfs }}"
 
 - name: Run the Cisco NXOS VRF logic.
   include_tasks: nxos_tasks.yml
